@@ -1,0 +1,33 @@
+<?php
+define('DCAMP_SP_IMPORTER_PATH', 'admin/structure/importer');
+define('DCAMP_SP_IMPORTER_ARTICLE_NUMBER', 'dcamp_sp_importer_article_number');
+
+/**
+ * Implements hook_menu().
+ */
+function dcamp_sp_importer_menu() {
+
+  $items[DCAMP_SP_IMPORTER_PATH] = array(
+    'title' => 'Importer',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('dcamp_sp_settings_importer_form'),
+    'access arguments' => array('importer page'),
+    'type' => MENU_CALLBACK,
+    'file' => 'dcamp_sp_importer.forms.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function dcamp_sp_importer_permission() {
+
+  return array(
+    'importer page' =>  array(
+      'title' => t('Access to importer page'),
+      'description' => t('Oppa gangnam style!'),
+    ),
+  );
+}

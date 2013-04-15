@@ -1,0 +1,6 @@
+name = Drupal Camp SP 2013 Importer
+description = Module provide a simple and custom batch operation
+core = 7.x
+version = 7.x-1.0
+package = DCAMP
+dependencies[] = node
