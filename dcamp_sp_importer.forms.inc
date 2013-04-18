@@ -7,7 +7,7 @@
  * @return [array] $form
  */
 function dcamp_sp_settings_importer_form($form, $form_state){
-
+echo variable_get(DCAMP_SP_IMPORTER_ARTICLE_NUMBER);
   $form['amount_articles'] = array(
     '#type' => 'textfield',
     '#title' => t("Articles's amount to import"),
@@ -55,6 +55,7 @@ function dcamp_sp_settings_importer_form_submit(&$form, &$form_state){
     'title' => t('Processing Importer DCAMP'),
     'init_message' => t('Importer DCAMP is starting.'),
     'error_message' => t('Importer DCAMP has encountered an error.'),
+    'progress_message' => t('Article importing'),
     'file' => drupal_get_path('module', 'dcamp_sp_importer') . '/dcamp_sp_importer.batchs.inc'
   );
 

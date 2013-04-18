@@ -20,9 +20,9 @@ function dcamp_sp_importer_importing($amount_articles, $article_number, &$contex
 
   // Define the start and end to the For
   $start = $context['sandbox']['current_pos'];
-  $end = $context['sandbox']['current_pos'] + floor($context['sandbox']['max'] / 100);
+  $end = $context['sandbox']['current_pos'] + ceil($context['sandbox']['max'] / 100);
 
-  for ($i=$start; $i < $end; $i++) {
+  for ($i=$start; $i <= $end; $i++) {
 
     // Prepare a node object
     $node = new stdClass();
@@ -31,7 +31,7 @@ function dcamp_sp_importer_importing($amount_articles, $article_number, &$contex
     node_object_prepare($node);
     $node->language = LANGUAGE_NONE;
     $node->title = t('Article # @number', array(
-        '@number' => $i,
+        '@number' => $context['sandbox']['article_number'],
       )
     );
     $node->body[$node->language][0]['value'] = t('Oppa gangnam style!, Oppa gangnam style!, Oppa gangnam style!');
@@ -39,20 +39,15 @@ function dcamp_sp_importer_importing($amount_articles, $article_number, &$contex
 
     node_save($node);
 
-    if (!empty($node->nid)) {
-
-      $context['sandbox']['processed']++;
-      $context['sandbox']['article_number']++;
-      $context['results'][] = $node->nid;
-    }
+    $context['sandbox']['processed']++;
+    $context['sandbox']['article_number']++;
+    $context['results'][] = $node->nid;
 
     // Import Status
     $context['message'] =
         t("
-          Articles: <br>
-          - Progress: @progress <br>
-          - Processed: @processed <br>
-          - Total: @max", array(
+          - Progress: @progress of @max<br>
+          - Processed: @processed <br>", array(
           '@progress' => $context['sandbox']['progress'],
           '@max' => $context['sandbox']['max'],
           '@processed' => $context['sandbox']['processed'],
@@ -92,5 +87,4 @@ function dcamp_sp_importer_importing_finished($success, $results, $operations){
 
   drupal_set_message($message);
   drupal_goto(DCAMP_SP_IMPORTER_PATH);
-
 }
