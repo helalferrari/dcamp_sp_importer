@@ -7,7 +7,7 @@
  * @return [array] $form
  */
 function dcamp_sp_settings_importer_form($form, $form_state){
-echo variable_get(DCAMP_SP_IMPORTER_ARTICLE_NUMBER);
+
   $form['amount_articles'] = array(
     '#type' => 'textfield',
     '#title' => t("Articles's amount to import"),
