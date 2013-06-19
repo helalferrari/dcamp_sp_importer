@@ -43,7 +43,7 @@ function dcamp_sp_settings_importer_form_submit(&$form, &$form_state){
 
   // Batch's definitions
   $batch = array(
-    'title' => t('Importing'),
+    'title' => t('Processing Importer DCAMP'),
     'operations' => array(
       array('dcamp_sp_importer_importing', array(
           $form_state['values']['amount_articles'],
@@ -52,7 +52,6 @@ function dcamp_sp_settings_importer_form_submit(&$form, &$form_state){
       ),
     ),
     'finished' => 'dcamp_sp_importer_importing_finished',
-    'title' => t('Processing Importer DCAMP'),
     'init_message' => t('Importer DCAMP is starting.'),
     'error_message' => t('Importer DCAMP has encountered an error.'),
     'progress_message' => t('Article importing'),
